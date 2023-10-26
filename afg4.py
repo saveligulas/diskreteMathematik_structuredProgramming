@@ -1,0 +1,6 @@
+print(0b10 << 2)
+print(0b1111 >> 2)
+print(0b1111 >> 2 << 2)
+print(256 >> 1)
+print(10 << 2)
+print(255 >> 1 << 1)
