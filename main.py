@@ -7,5 +7,5 @@ struct = StructProgram()
 
 print(struct.getNumberList(1000))
 print(struct.yearIsLeapYear(1900))
-print(37*45)
+print(5 // 9)
 
