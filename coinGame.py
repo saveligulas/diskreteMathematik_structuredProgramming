@@ -1,6 +1,6 @@
 QUESTION_ONE = "What row do you want to remove coins from?"
 QUESTION_TWO = "What amount of coins do you want to remove?"
-COIN_STRING = b'\xE2\xAC\xA4'.decode('utf-8')
+COIN_CHAR = 'O'
 PLAYER_ONE_STRING = input("Player One's name?")
 PLAYER_TWO_STRING = input("Player Two's name?")
 
@@ -16,7 +16,7 @@ def clear_console():
 
 
 def input_is_correct():
-    if row < 0 or row >= 3:
+    if row < 0 or row > 2:
         return False
 
     if coin_board[row] < amount or amount < 1:
@@ -41,7 +41,7 @@ def print_board():
     for i in range(len(coin_board)):
         coins = "Row 1:   " if i == 0 else "Row 2:  " if i == 1 else "Row 3: "
         for c in range(coin_board[i]):
-            coins = coins + f"{COIN_STRING}  "
+            coins = coins + f"{COIN_CHAR}  "
         print(coins)
 
 
