@@ -1,3 +1,4 @@
+import math
 from datetime import time
 from timeit import timeit
 
@@ -83,6 +84,7 @@ def extggT(a, b):
             term = term.replace(num, f"{calc[index][0]}-{calc[index][1]}")
     return term
 
+
 def checkISBN(digits):
     counter = 0
     sum = 0
@@ -95,9 +97,7 @@ def checkISBN(digits):
 
 
 def isPrime(n):
-    for i in range(2, n):
-        if i > n // 2:
-            break
+    for i in range(2, math.floor(math.sqrt(n))):
         if (n % i) == 0:
             return False
     return True
@@ -109,6 +109,35 @@ def getPrimes(n):
         if isPrime(i):
             primes.append(i)
     return primes
+
+
+def getSieb(n):
+    primes = list(range(1, n + 1))
+    sum = 0
+
+    for i in range(2, math.floor(math.sqrt(n))):
+        if (isPrime(i)):
+            counter = 2
+            while (sum < n):
+                sum = i * counter
+                counter += 1
+                if (sum in primes):
+                    primes.remove(sum)
+
+    return primes
+
+
+def pzSieb(n):
+    primes = []
+    numbers = list(range(2,n))
+    c = 2
+    while c*c < n:
+        for k in range(c, n , c):
+            if k in numbers:
+                numbers.remove(k)
+        primes.append(c)
+        c = numbers[0]
+    return [1] + primes + numbers
 
 
 def primeFactor(n):
@@ -123,4 +152,19 @@ def primeFactor(n):
             c += 1
     return result
 
-print(ggTbetter(400, 225))
+
+def convertNumberToChar(n):
+    return chr(ord('a') + n)
+
+
+def caesarEnc(msg, key):
+    result = ""
+    for char in msg:
+        result += (chr(ord(char) - ord('a') + key % 26 + ord('a')))
+    return result
+
+
+print(primeFactor(32592))
+print(convertNumberToChar(0))
+print(caesarEnc("Hallo", 5))
+print(pzSieb(1000)[50])
