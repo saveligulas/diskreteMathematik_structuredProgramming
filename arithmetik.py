@@ -164,7 +164,70 @@ def caesarEnc(msg, key):
     return result
 
 
-print(primeFactor(32592))
-print(convertNumberToChar(0))
-print(caesarEnc("Hallo", 5))
-print(pzSieb(1000)[50])
+def caesarDec(msg, key):
+    result = ""
+    for char in msg:
+        result += (chr(ord(char) - ord('A') - key % 26 + ord('A')))
+    return result
+
+
+def rsa_get_private_public_key():
+    p = 999999999877
+    q = 3529385311
+
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    e = 0
+
+    for i in range(2, phi - 1):
+        if ggT_better(i, phi) == 1:
+            e = i
+            break
+
+    inv = phi + 1
+
+    while inv % e != 0:
+        inv += phi
+
+    d = inv // e
+
+    return (p, q, d), (n, e), (inv, phi)
+
+
+values = rsa_get_private_public_key()
+
+private_key, public_key, test_values = values[0], values[1], values[2]
+
+print(f"Private Key: p={private_key[0]}, q={private_key[1]}, d={private_key[2]} - Public Key: n={public_key[0]}, e={public_key[1]}")
+
+
+def encrypt(message, pbl_key):
+    result = []
+
+    for char in message:
+        result.append(ord(char) ** pbl_key[1] % pbl_key[0])
+
+    return result
+
+sample_text = "Hello this message is encrypted with RSA"
+encrypted_text = encrypt(sample_text, public_key)
+
+print(f"This text: \n{sample_text}\nWas encrypted by our public key and turned into: \n{encrypted_text}")
+
+
+def decrypt(message, prv_key, pbl_key):
+    result = ""
+
+    for value in message:
+        calc = (value ** prv_key[2]) % pbl_key[0]
+        result += chr(int(calc))
+
+    return result
+
+print(caesarDec("Hhhh", 7))
+print(caesarEnc("Aaaa", 7))
+
+
+#decrypted_text = decrypt(encrypted_text, private_key, public_key)
+
+#print(f"Now we decrypt it with our private and public key and we get:\n{decrypted_text}")
