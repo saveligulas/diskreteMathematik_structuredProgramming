@@ -1,7 +1,7 @@
 def russian_farmer_multiplication(a, b):
     half_list = []
     double_list = []
-    sum = 0
+    total = 0
     multiplicand = a
     multiplicator = b
 
@@ -13,11 +13,11 @@ def russian_farmer_multiplication(a, b):
         double_list.append(multiplicator)
 
         if half_list[i] % 2 != 0:
-            sum += double_list[i]
+            total += double_list[i]
 
         multiplicator = multiplicator * 2
 
-    return sum
+    return total
 
 
 def is_leap_year(year):
@@ -99,10 +99,6 @@ def day_in_the_year(day, month, year):
 
 
 def local_min_max(number_list):
-    prev_num = 0
-    next_num = 0
-    current_num = 0
-
     local_mins = 0
     local_maxs = 0
 

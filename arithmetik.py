@@ -152,6 +152,8 @@ def primeFactor(n):
             c += 1
     return result
 
+print(primeFactor(52192))
+
 
 def convertNumberToChar(n):
     return chr(ord('a') + n)

@@ -11,10 +11,6 @@ def is_leap_year(year):
     return False
 
 
-def message_builder(day, month, year, calc):
-    return f"The {day} of {month}, is the {calc} day of {year}"
-
-
 def get_day_of_the_year(day, month, year):
     MONTH_DICT = {'Jan': (1, 31),
                   'Feb': (2, 28),
@@ -28,7 +24,7 @@ def get_day_of_the_year(day, month, year):
                   'Oct': (10, 31),
                   'Nov': (11, 30),
                   'Dec': (12, 31)}
-    ERR_MSG = "ERR"
+    ERR_MSG = 'ERR'
     MONTH_DAYS = []
     for key in MONTH_DICT.keys():
         MONTH_DAYS.append(MONTH_DICT.get(key))
@@ -51,7 +47,7 @@ def get_day_of_the_year(day, month, year):
         if MONTH > 2:
             day_calc += 1
 
-    if type(day) != int or MONTH_DICT.get(month)[1] + additive < day or day < 0:
+    if type(day) != int or MONTH_DICT.get(month)[1] + additive < day or day < 1:
         return ERR_MSG
 
     for i in range(1, MONTH):
@@ -79,19 +75,17 @@ def run_test_cases():
                   (29, 'Feb', 2000, 60),
                   (31, 'Dec', 2023, 365)]
 
-    successful = True
-
     for test_case in TEST_CASES:
         print(Fore.LIGHTWHITE_EX)
-
         calc = get_day_of_the_year(test_case[0], test_case[1], test_case[2])
+
         if calc != test_case[3]:
             successful = False
         else:
             successful = True
+
         print(f"Test Case: Day-{test_case[0]}, Month-{test_case[1]}, Year-{test_case[2]} \nExpected Value: {test_case[3]} | Calculated Value: {calc}")
         print(Fore.GREEN + "Successful" if successful else Fore.RED + "Unsuccessful")
-        print(Fore.LIGHTWHITE_EX)
 
 
 run_test_cases()
